@@ -2,8 +2,6 @@ import java.util.ArrayList;
 
 public class OurStateTree extends StateTree {
 	
-	StateTree state;
-	
 	public OurStateTree(int r, int c, int w, int t, boolean p1, boolean p2, StateTree p) {
 		super(r, c, w, t, p1, p2, p);
 	}
