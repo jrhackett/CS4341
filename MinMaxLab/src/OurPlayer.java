@@ -14,7 +14,7 @@ public class OurPlayer extends Player {
 		OurStateTree betterState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state.parent);
 		
 		//get the best move
-		OurMove move = minimax(betterState, 2, this.turn);
+		OurMove move = minimax(betterState, betterState.columns, this.turn);
 		
 		//return Move to the Referee
 		return new Move(move.pop, move.column);
