@@ -75,31 +75,9 @@ public class OurPlayer extends Player {
 		for(int i=0; i < state.winNumber; i++){
 			int numCon = 0;
 			numCon = checkConnect(state, i);
-			heur += (numCon*10)^i;
+			heur = (numCon*10)^i;
 		}
 		return heur;	//TODO fix this
-	}
-	
-	private int Max(OurStateTree state){
-		int max = Integer.MIN_VALUE;
-		ArrayList<Move> moves = state.getMoves();
-		for(Move move : moves){
-			if(eval(state) > max){
-				max = eval(state);
-			}
-		}
-		return max;
-	}
-	
-	private int Min(OurStateTree state){
-		int min = Integer.MAX_VALUE;
-		ArrayList<Move> moves = state.getMoves();
-		for(Move move : moves){
-			if(eval(state) > min){
-				min = eval(state);
-			}
-		}
-		return min;
 	}
 
 	// This counts how many n-in-a-rows each player has
@@ -159,4 +137,7 @@ public class OurPlayer extends Player {
 		}
 		return winTotal;
 	}
+
+
+
 }
