@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class OurStateTree extends StateTree {
+public class OurStateTree extends StateTree implements Cloneable {
 	
 	public OurStateTree(int r, int c, int w, int t, boolean p1, boolean p2, StateTree p) {
 		super(r, c, w, t, p1, p2, p);
@@ -18,5 +18,29 @@ public class OurStateTree extends StateTree {
 			}
 		}
 		return moves;
+	}
+	
+	public ArrayList<OurStateTree> generateChildStates() {
+		ArrayList<OurStateTree> states = new ArrayList<OurStateTree>();
+		for(Move m : this.getMoves()) {
+			OurStateTree newState = this.copy(this);
+			System.out.println("Before: ");
+			this.display();
+			System.out.println("After: ");
+			newState.display();
+			newState.makeMove(m);
+			states.add(newState);
+		}
+		return states;
+	}
+	
+	public static OurStateTree copy(OurStateTree state) {
+		OurStateTree newState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state.parent);
+		for(int i = 0; i < newState.rows; i++) {
+			for(int j = 0; j < newState.columns; j++) {
+				newState.boardMatrix[i][j] = state.boardMatrix[i][j];
+			}
+		}
+		return newState;
 	}
 }

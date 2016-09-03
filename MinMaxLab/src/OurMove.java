@@ -8,4 +8,8 @@ public class OurMove extends Move {
 		super(p, c);
 		this.score = s;
 	}
+	
+	public String toString() {
+		return "Pop: " + this.pop + " Col: " + this.column + " Score: " + this.score;
+	}
 }
