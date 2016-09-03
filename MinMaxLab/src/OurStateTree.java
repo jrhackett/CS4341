@@ -23,11 +23,7 @@ public class OurStateTree extends StateTree implements Cloneable {
 	public ArrayList<OurStateTree> generateChildStates() {
 		ArrayList<OurStateTree> states = new ArrayList<OurStateTree>();
 		for(Move m : this.getMoves()) {
-			OurStateTree newState = this.copy(this);
-			System.out.println("Before: ");
-			this.display();
-			System.out.println("After: ");
-			newState.display();
+			OurStateTree newState = OurStateTree.copy(this);
 			newState.makeMove(m);
 			states.add(newState);
 		}
