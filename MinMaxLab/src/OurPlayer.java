@@ -22,62 +22,82 @@ public class OurPlayer extends Player {
 		OurMove move = minimax(betterState, betterState.columns, this.turn, -1, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
 		//return Move to the Referee
-		System.out.println(move.column);
 		return new Move(move.pop, move.column);
 	}
 
+	// minimax function with alpha beta pruning
 	private OurMove minimax(OurStateTree state, int depth, int t, int col, boolean pop, int alpha, int beta) {
 		
+		//if we're at the end of our tree or the board is full, return the heuristic
 		if(depth == 0 || state.getMoves().isEmpty()) {
-			//return new OurMove(pop, col, this.eval(state));
+			return new OurMove(pop, col, this.eval(state));
 		}
 		
+		//get all children board states
 		ArrayList<OurStateTree> childStates = state.generateChildStates();
 		
+		//if maximizing
 		if(t == 1) {
+			//init some values
 			int bestValue = Integer.MIN_VALUE;
+			//currently not using these two
 			int bestCol = -1;
 			boolean bestPop = false;
+			
+			//for every child state
 			for(OurStateTree s : childStates) {
+				//recurse through minimax with current state, one less depth, player2 turn, and current values for move and alpha/beta
 				OurMove current = minimax(s, depth - 1, 2, col, pop, alpha, beta);
+				//if that score is better, replace it
 				if(current.score > bestValue) {
 					bestValue = current.score;
-					bestCol = current.column;
-					bestPop = current.pop;
+					col = current.column;
+					pop = current.pop;
 				}
+				System.out.println(col);
 				
+				//if current score is better than current alpha, replace it
 				if(current.score > alpha) {
 					alpha = current.score;
 				}
 				
+				//beta cutoff
 				if(alpha >= beta) {
 					break;
 				}
 			}
-			return new OurMove(bestPop, bestCol, bestValue);
+			return new OurMove(pop, col, bestValue);
 		}
-		
+		//else minimizing
 		else {
+			//init some values
 			int bestValue = Integer.MAX_VALUE;
+			//currently not using these two
 			int bestCol = -1;
 			boolean bestPop = false;
+			
+			//for every child state
 			for(OurStateTree s : childStates) {
+				//recurse through minimax with current state, one less depth, player2 turn, and current values for move and alpha/beta
 				OurMove current = minimax(s, depth - 1, 1, col, pop, alpha, beta);
+				//if this score is better than the best value, replace it
 				if(current.score < bestValue) {
 					bestValue = current.score;
-					bestCol = current.column;
-					bestPop = current.pop;
+					col = current.column;
+					pop = current.pop;
 				}
 				
+				//if this value is better than current beta, replace it
 				if(current.score < beta) {
 					beta = current.score;
 				}
 				
+				//alpha cutoff
 				if(beta <= alpha) {
 					break;
 				}
 			}
-			return new OurMove(bestPop, bestCol, bestValue);
+			return new OurMove(pop, col, bestValue);
 		}
 	}
 
