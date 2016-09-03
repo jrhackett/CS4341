@@ -19,17 +19,17 @@ public class OurPlayer extends Player {
 		OurStateTree betterState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state.parent);
 
 		//get the best move
-		OurMove move = minimax(betterState, betterState.columns, this.turn);
+		OurMove move = minimax(betterState, betterState.columns, this.turn, -1, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
 		//return Move to the Referee
 		System.out.println(move.column);
 		return new Move(move.pop, move.column);
 	}
 
-	private OurMove minimax(OurStateTree state, int depth, int t) {
+	private OurMove minimax(OurStateTree state, int depth, int t, int col, boolean pop, int alpha, int beta) {
 		
 		if(depth == 0 || state.getMoves().isEmpty()) {
-			// return new OurMove(WHAT, DO?, this.eval());
+			//return new OurMove(pop, col, this.eval(state));
 		}
 		
 		ArrayList<OurStateTree> childStates = state.generateChildStates();
@@ -39,11 +39,19 @@ public class OurPlayer extends Player {
 			int bestCol = -1;
 			boolean bestPop = false;
 			for(OurStateTree s : childStates) {
-				OurMove current = minimax(s, depth - 1, 2);
+				OurMove current = minimax(s, depth - 1, 2, col, pop, alpha, beta);
 				if(current.score > bestValue) {
 					bestValue = current.score;
 					bestCol = current.column;
 					bestPop = current.pop;
+				}
+				
+				if(current.score > alpha) {
+					alpha = current.score;
+				}
+				
+				if(alpha >= beta) {
+					break;
 				}
 			}
 			return new OurMove(bestPop, bestCol, bestValue);
@@ -54,11 +62,19 @@ public class OurPlayer extends Player {
 			int bestCol = -1;
 			boolean bestPop = false;
 			for(OurStateTree s : childStates) {
-				OurMove current = minimax(s, depth - 1, 1);
+				OurMove current = minimax(s, depth - 1, 1, col, pop, alpha, beta);
 				if(current.score < bestValue) {
 					bestValue = current.score;
 					bestCol = current.column;
 					bestPop = current.pop;
+				}
+				
+				if(current.score < beta) {
+					beta = current.score;
+				}
+				
+				if(beta <= alpha) {
+					break;
 				}
 			}
 			return new OurMove(bestPop, bestCol, bestValue);
