@@ -7,11 +7,16 @@ public class OurStateTree extends StateTree implements Cloneable {
 	ArrayList<OurStateTree> childrenStates;
 	
 	//our state tree implementation, init values
-	public OurStateTree(int r, int c, int w, int t, boolean p1, boolean p2, StateTree p) {
+	public OurStateTree(int r, int c, int w, int t, boolean p1, boolean p2, StateTree p, int[][] board) {
 		super(r, c, w, t, p1, p2, p);
 		startingMove = new Move(false, -1);
 		childrenStates = new ArrayList<OurStateTree>();
 		bestValue = t == 1 ? -1000000 : 1000000;
+		for(int i = 0; i < this.rows; i++) {
+			for(int j = 0; j < this.columns; j++) {
+				this.boardMatrix[i][j] = board[i][j];
+			}
+		}
 	}
 	
 	//returns an ArrayList of all valid moves on the board, does not include pops right now
@@ -72,7 +77,7 @@ public class OurStateTree extends StateTree implements Cloneable {
 	//returns a copy of this tree so we're not messing with java pointers
 	public static OurStateTree copy(OurStateTree state) {
 		//init newState with new OurStateTree
-		OurStateTree newState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state);
+		OurStateTree newState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state, state.boardMatrix);
 		//for every spot in boardmatrix, copy that value to the newStates boardMatrix
 		for(int i = 0; i < newState.rows; i++) {
 			for(int j = 0; j < newState.columns; j++) {
@@ -154,9 +159,12 @@ public class OurStateTree extends StateTree implements Cloneable {
 		return winTotal;
 	}
 	
+	//checks in column n is full or not
 	public boolean checkFullColumn(int n) {
-		if(this.boardMatrix[0][n] != 0) {
-			return true;
+		for(int i = 0; i < this.rows; i++) {
+			if(this.boardMatrix[i][n] != 0) {
+				return true;
+			}
 		}
 		return false;
 	}

@@ -9,18 +9,14 @@ public class OurPlayer extends Player {
 	//getMove returns a Move to the Referee
 	public Move getMove(StateTree state) {
 		//make our betterState object
-		OurStateTree betterState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state.parent);
-		
+		OurStateTree betterState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state.parent, state.boardMatrix);
+
 		//run minimax and get our int value
 		int move = minimax(betterState, 0, -1000000, 1000000);
 		
-		for(OurStateTree s : betterState.childrenStates) {
-			System.out.println(s.bestValue + " col: " + s.startingMove.column);
-		}
-		
 		//circle through this states direct children and see which one has the same value as what minimax just returned
 		for(OurStateTree s : betterState.childrenStates) {
-			if(s.bestValue == move && !betterState.checkFullColumn(s.startingMove.column)) {
+			if(s.bestValue == move) {
 				return s.startingMove;
 			}
 		}
@@ -32,7 +28,7 @@ public class OurPlayer extends Player {
 	private int minimax(OurStateTree state, int depth, int alpha, int beta) {
 		
 		//if at arbitrary max depth, return the heuristic
-		if(depth == 5) {
+		if(depth == 7) {
 			return state.eval();
 		}
 		
