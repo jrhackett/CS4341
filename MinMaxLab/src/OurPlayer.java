@@ -5,9 +5,6 @@ import java.util.ArrayList;
 
 public class OurPlayer extends Player {
 
-	private Referee referee;
-	private int maxDepth;
-
 	public OurPlayer(String n, int t, int l)
 	{
 		super(n, t, l);
@@ -20,169 +17,55 @@ public class OurPlayer extends Player {
 		OurStateTree betterState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state.parent);
 
 		//get the best move
-		OurMove move = minimax(betterState, betterState.columns, this.turn, -1, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+		Move move = new Move(false, minimax2(betterState, Integer.MIN_VALUE, betterState.columns, 1));
 
 		//return Move to the Referee
-		return new Move(move.pop, move.column);
-	}
-	private int[][] copyBoard(int[][]toCopy){
-		int rows = toCopy.length;
-		int columns = toCopy[0].length;
-		int[][] copy = new int[rows][columns];
-		for(int i =0; i<rows; i++){
-			for(int j =0; i<columns; j++){
-				copy[i][j] = toCopy[i][j];
-			}
-		}
-		return copy;
+		return move;
 	}
 
 
-	private int negaMax(int[][] board, int alpha, int depth, int t){
-
+	private int minimax2(OurStateTree state, int alpha, int depth, int t){
 		int bestCol = 0;
 		int bestVal = alpha;
-
-
-		int[][] newBoard = copyBoard(board);
-		for(int i =0; i<newBoard[0].length;i++){
-
-			if(colBottom(newBoard, i) ==  newBoard.length){
-				int[][] test = new int[newBoard.length][newBoard[0].length];
-				if(depth< maxDepth){//need to set maxDepth
-					test = copyBoard(newBoard);
-					test[i][colBottom(test, i)] = t;
-					int testBest = -negaMax(test, -1000000, depth+1, OtherPlayer(t));
-					if(testBest >= bestVal){
-						bestVal = testBest;
-						bestCol = i;
+		int player = t == 1 ? 2 : 1;
+		
+		if(OurStateTree.checkForWinner(state) != 0) {
+			if(player == 1) {
+				bestVal = Integer.MAX_VALUE - depth;
+			}
+			else {
+				bestVal = Integer.MIN_VALUE + depth;
+			}
+		}
+		else if(OurStateTree.checkFull(state)) {
+			bestVal = 0;
+		}
+		else if(depth == 0) {
+			int m = this.eval(state);
+			bestVal = m == 0 ? m : m - depth;
+		}
+		else {
+			ArrayList<OurStateTree> newStates = state.generateChildStates();
+			if(depth > 0) {
+				for(OurStateTree newState : newStates) {
+					int a = minimax2(newState, Integer.MIN_VALUE, depth - 1, player);
+					if(a > bestVal) {
+						bestCol = newState.newCol;
+						bestVal = a;
 					}
 				}
-
 			}
 		}
-		if (depth == 0){
-			return bestVal;
-		}else{
-			return bestVal;
+		
+		if(depth == 0) {
+			return bestCol;
 		}
-	}
-
-	//returns the other player
-	public int OtherPlayer(int t){
-		if(t==1) {return 2;}
-		else{return 1;}}
-
-	//returns bottom row of a column
-	public int colBottom(int[][] board, int column){
-		int bottom = 0;
-		for(int row = 0; row < board.length; row++){
-			if (board[row][column] != 0 ){
-				bottom++;
-			}else{
-				return bottom;
-			}
-		}
-		return bottom;
-	}
-
-	//	public boolean Full(int[][]board, int column){
-	//		int sum = 0;
-	//		for(int row = 0; row < board.length; row++){
-	//			if (board[row][column] != 0 ){
-	//				sum++;
-	//			}
-	//		}
-	//		if(sum<board.length){
-	//			return false;
-	//		}else{
-	//			return true;
-	//		}
-	//	}
-
-	// minimax function with alpha beta pruning
-	private OurMove minimax(OurStateTree state, int depth, int t, int col, boolean pop, int alpha, int beta) {
-
-		//if we're at the end of our tree or the board is full, return the heuristic
-		if(depth == 0 || state.getMoves().isEmpty()) {
-			return new OurMove(pop, col, this.eval(state));
-		}
-		//get all children board states
-		ArrayList<OurStateTree> childStates = state.generateChildStates();
-
-		//if maximizing
-		if(t == 1) {
-			//init some values
-			int bestValue = Integer.MIN_VALUE;
-			//currently not using these two
-			int bestCol = -1;
-			boolean bestPop = false;
-
-
-
-			//for every child state
-			for(OurStateTree s : childStates) {
-				//recurse through minimax with current state, one less depth, player2 turn, and current values for move and alpha/beta
-				OurMove current = minimax(s, depth - 1, 2, col, pop, alpha, beta);
-				//if that score is better, replace it
-				if(current.score > bestValue) {
-					bestValue = current.score;
-					col = current.column;
-					pop = current.pop;
-					OurMove bestMove = minimax(s, depth--, t, col, pop, alpha, beta);
-				}
-				System.out.println(col);
-
-				//if current score is better than current alpha, replace it
-				if(current.score > alpha) {
-					alpha = current.score;
-				}
-
-				//beta cutoff
-				if(alpha >= beta) {
-					break;
-				}
-				depth--;
-
-
-			}
-
-			return bestMove;
-		}
-		//else minimizing
 		else {
-			//init some values
-			int bestValue = Integer.MAX_VALUE;
-			//currently not using these two
-			int bestCol = -1;
-			boolean bestPop = false;
-
-			//for every child state
-			for(OurStateTree s : childStates) {
-				//recurse through minimax with current state, one less depth, player2 turn, and current values for move and alpha/beta
-				OurMove current = minimax(s, depth - 1, 1, col, pop, alpha, beta);
-				//if this score is better than the best value, replace it
-				if(current.score < bestValue) {
-					bestValue = current.score;
-					col = current.column;
-					pop = current.pop;
-				}
-
-				//if this value is better than current beta, replace it
-				if(current.score < beta) {
-					beta = current.score;
-				}
-
-				//alpha cutoff
-				if(beta <= alpha) {
-					break;
-				}
-			}
-			return new OurMove(pop, col, bestValue);
+			return bestVal;
 		}
 	}
 
-	private int eval(StateTree state) {
+	private int eval(OurStateTree state) {
 		int heur = 0;
 		for(int i=0; i < state.winNumber; i++){
 			int numCon = 0;
