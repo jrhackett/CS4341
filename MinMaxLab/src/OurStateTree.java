@@ -3,10 +3,12 @@ import java.util.ArrayList;
 public class OurStateTree extends StateTree implements Cloneable {
 	
 	int newCol;
+	boolean newPop;
 	
 	public OurStateTree(int r, int c, int w, int t, boolean p1, boolean p2, StateTree p) {
 		super(r, c, w, t, p1, p2, p);
 		newCol = -1;
+		newPop = false;
 	}
 	
 	//returns an ArrayList of all valid moves on the board, does not include pops right now
@@ -20,8 +22,32 @@ public class OurStateTree extends StateTree implements Cloneable {
 				}
 			}
 		}
+		
+//		//this will add in pops to our list of available moves. however, our minimax is not ready for it yet
+//		if(this.turn == 1) {
+//			if(this.pop1 == false) {
+//				moves.addAll(this.getPopMoves());
+//			}
+//		}
+//		else {
+//			if(this.pop2 == false) {
+//				moves.addAll(this.getPopMoves());
+//			}
+//		}
+		
 		return moves;
 	}
+	
+//	//helper for getting pop moves, need to edit minimax so this can work
+//	private ArrayList<Move> getPopMoves() {
+//		ArrayList<Move> moves = new ArrayList<Move>();
+//		for(int i = 0; i < this.columns; i++) {
+//			if(this.boardMatrix[this.rows - 1][i] == this.turn) {
+//				moves.add(new Move(true, i));
+//			}
+//		}
+//		return moves;
+//	}
 	
 	public ArrayList<OurStateTree> generateChildStates() {
 		ArrayList<OurStateTree> states = new ArrayList<OurStateTree>();
@@ -29,6 +55,7 @@ public class OurStateTree extends StateTree implements Cloneable {
 			OurStateTree newState = OurStateTree.copy(this);
 			newState.makeMove(m);
 			newState.newCol = m.column;
+			newState.newPop = m.pop;
 			states.add(newState);
 		}
 		return states;
