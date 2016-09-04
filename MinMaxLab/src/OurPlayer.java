@@ -1,4 +1,10 @@
 
+/*
+ * Jacob Hackett
+ * Trevor Rocks
+ * CS4341 A16
+ */
+
 public class OurPlayer extends Player {
 
 	int maxDepth;

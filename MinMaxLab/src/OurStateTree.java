@@ -1,3 +1,10 @@
+
+/*
+ * Jacob Hackett
+ * Trevor Rocks
+ * CS4341 A16
+ */
+
 import java.util.ArrayList;
 
 public class OurStateTree extends StateTree implements Cloneable {
