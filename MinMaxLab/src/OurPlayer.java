@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-
-
-
 
 public class OurPlayer extends Player {
 
@@ -12,65 +8,79 @@ public class OurPlayer extends Player {
 
 
 	public Move getMove(StateTree state) {
-		System.out.println("Hi");
 		//using custom state so we have better methods available to us, initializing using the RefereeBoard
 		OurStateTree betterState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state.parent);
 
+		//betterState.initChildren();
 		//get the best move
-		Move move = new Move(false, minimax2(betterState, Integer.MIN_VALUE, betterState.columns, 1));
-
-		//return Move to the Referee
-		return move;
+		int move = minimax(betterState, 0, this.turn, Integer.MIN_VALUE, Integer.MAX_VALUE);
+		
+		for(OurStateTree s : betterState.childrenStates) {
+			if(s.bestValue == move) {
+//				return s.startingMove;
+				
+			}
+//			System.out.println(s.bestValue);
+		}
+		
+		return new Move(false, -1);
 	}
 
+	private int minimax(OurStateTree state, int depth, int t, int alpha, int beta) {
+		
+		if(depth == 5) {
+			state.bestValue = this.eval(state);
+			System.out.println("end: " + state.bestValue);
+			return state.bestValue;
+		}
+		
+		state.initChildren();
+		
+		if(t == 1) {
+			for(OurStateTree s : state.childrenStates) {
+				int current = minimax(s, depth + 1, 2, alpha, beta);
 
-	private int minimax2(OurStateTree state, int alpha, int depth, int t){
-		int bestCol = 0;
-		int bestVal = alpha;
-		int player = t == 1 ? 2 : 1;
-		
-		if(OurStateTree.checkForWinner(state) != 0) {
-			if(player == 1) {
-				bestVal = Integer.MAX_VALUE - depth;
-			}
-			else {
-				bestVal = Integer.MIN_VALUE + depth;
-			}
-		}
-		else if(OurStateTree.checkFull(state)) {
-			bestVal = 0;
-		}
-		else if(depth == 0) {
-			int m = this.eval(state);
-			bestVal = m == 0 ? m : m - depth;
-		}
-		else {
-			ArrayList<OurStateTree> newStates = state.generateChildStates();
-			if(depth > 0) {
-				for(OurStateTree newState : newStates) {
-					int a = minimax2(newState, Integer.MIN_VALUE, depth - 1, player);
-					if(a > bestVal) {
-						bestCol = newState.newCol;
-						bestVal = a;
-					}
+				if(current > state.bestValue) {
+					System.out.println("I changed: " + state.bestValue + " " + current);
+					state.bestValue = current;
+					
 				}
+//				if(current > alpha) {
+//					alpha = current;
+//				}
+//				
+//				if(alpha >= beta) {
+//					break;
+//				}
 			}
+			return state.bestValue;
 		}
 		
-		if(depth == 0) {
-			return bestCol;
-		}
 		else {
-			return bestVal;
+			for(OurStateTree s : state.childrenStates) {
+				int current = minimax(s, depth + 1, 1, alpha, beta);
+
+				if(current < state.bestValue) {
+					state.bestValue = current;
+				}			
+//				if(current < beta) {
+//					beta = current;
+//				}
+//				
+//				if(beta <= alpha) {
+//					break;
+//				}
+			}
+			return state.bestValue;
 		}
 	}
 
 	private int eval(OurStateTree state) {
 		int heur = 0;
-		for(int i=0; i < state.winNumber; i++){
+		for(int i = 0; i < state.winNumber; i++){
 			int numCon = 0;
 			numCon = checkConnect(state, i);
-			heur = (numCon*10)^i;
+			heur += (numCon * i);
 		}
 		return heur;	//TODO fix this
 	}
