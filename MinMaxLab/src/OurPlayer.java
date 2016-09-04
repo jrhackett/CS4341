@@ -1,9 +1,23 @@
 
 public class OurPlayer extends Player {
 
+	int maxDepth;
+	
 	//OurPlayer is just our implementation of the Player class
 	public OurPlayer(String n, int t, int l) {
 		super(n, t, l);
+		if(t >= 15) {
+			this.maxDepth = 11;
+		}
+		else if(t >= 10) {
+			this.maxDepth = 10;
+		}
+		else if(t >= 5) {
+			this.maxDepth = 9;
+		}
+		else {
+			this.maxDepth = 8;
+		}
 	}
 
 	//getMove returns a Move to the Referee
@@ -28,7 +42,7 @@ public class OurPlayer extends Player {
 	private int minimax(OurStateTree state, int depth, int alpha, int beta) {
 		
 		//if at arbitrary max depth, return the heuristic
-		if(depth == 7) {
+		if(depth == maxDepth) {
 			return state.eval();
 		}
 		

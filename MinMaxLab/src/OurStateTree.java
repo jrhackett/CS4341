@@ -95,7 +95,7 @@ public class OurStateTree extends StateTree implements Cloneable {
 			int numCon = 0;
 			//calculate the number of connections i long for each player and add a weighted sum to the heuristic
 			numCon = checkConnect(this, i);
-			heur += (numCon * i);
+			heur += (numCon ^ i);
 		}
 		return heur;	
 	}
