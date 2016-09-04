@@ -6,6 +6,7 @@ public class OurStateTree extends StateTree implements Cloneable {
 	int bestValue;
 	ArrayList<OurStateTree> childrenStates;
 	
+	//our state tree implementation, init values
 	public OurStateTree(int r, int c, int w, int t, boolean p1, boolean p2, StateTree p) {
 		super(r, c, w, t, p1, p2, p);
 		startingMove = new Move(false, -1);
@@ -16,26 +17,22 @@ public class OurStateTree extends StateTree implements Cloneable {
 	//returns an ArrayList of all valid moves on the board, does not include pops right now
 	public ArrayList<Move> getMoves() {
 		ArrayList<Move> moves = new ArrayList<Move>();
+		//for every spot in boardmatrix, add valid moves to this arraylist, only one per column
 		for(int i = 0; i < this.columns; i++) {
 			for(int j = this.rows - 1; j > 0; j--) {
 				if(this.boardMatrix[j][i] == 0) {
 					moves.add(new Move(false, i)); 
-//					System.out.println("adding move col: " + i);
 					break;
 				}
 			}
 		}
 		
-		//this will add in pops to our list of available moves. however, our minimax is not ready for it yet
- 		if(this.turn == 1) {
- 			if(this.pop1 == false) {
- 				moves.addAll(this.getPopMoves());
- 			}
+		//this will add in pops to our list of available moves
+ 		if(this.turn == 1 && this.pop1 == false) {
+			moves.addAll(this.getPopMoves());
  		}
- 		else {
- 			if(this.pop2 == false) {
- 				moves.addAll(this.getPopMoves());
- 			}
+ 		else if(this.pop2 == false){
+			moves.addAll(this.getPopMoves());
  		}
 		return moves;
 	}
@@ -43,6 +40,7 @@ public class OurStateTree extends StateTree implements Cloneable {
 	//helper for getting pop moves, need to edit minimax so this can work
  	private ArrayList<Move> getPopMoves() {
  		ArrayList<Move> moves = new ArrayList<Move>();
+ 		//for every bottom spot in the board, if its your piece, add that pop to the valid moves
  		for(int i = 0; i < this.columns; i++) {
  			if(this.boardMatrix[this.rows - 1][i] == this.turn) {
  				moves.add(new Move(true, i));
@@ -51,15 +49,19 @@ public class OurStateTree extends StateTree implements Cloneable {
  		return moves;
  	}
 	
+ 	//initializes children states for this state
 	public void initChildren() {
 		this.childrenStates = generateChildStates();
 	}
 	
-	public ArrayList<OurStateTree> generateChildStates() {
+	//generates all valid children states for this board using the getMoves
+	private ArrayList<OurStateTree> generateChildStates() {
 		ArrayList<OurStateTree> states = new ArrayList<OurStateTree>();
+		//for every move in get moves, generate a child state
 		for(Move m : this.getMoves()) {
 			OurStateTree newState = OurStateTree.copy(this);
 			newState.makeMove(m);
+			//initializes bestValue to max or min depending on the turn
 			newState.bestValue = newState.turn == 1 ? -1000000 : 1000000;
 			newState.startingMove = m;
 			states.add(newState);
@@ -67,8 +69,11 @@ public class OurStateTree extends StateTree implements Cloneable {
 		return states;
 	}
 	
+	//returns a copy of this tree so we're not messing with java pointers
 	public static OurStateTree copy(OurStateTree state) {
+		//init newState with new OurStateTree
 		OurStateTree newState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state);
+		//for every spot in boardmatrix, copy that value to the newStates boardMatrix
 		for(int i = 0; i < newState.rows; i++) {
 			for(int j = 0; j < newState.columns; j++) {
 				newState.boardMatrix[i][j] = state.boardMatrix[i][j];
@@ -77,10 +82,13 @@ public class OurStateTree extends StateTree implements Cloneable {
 		return newState;
 	}
 	
+	//eval function returns a heuristic for this state
 	public int eval() {
 		int heur = 0;
+		//for every number of connections from 1 to winNumber
 		for(int i = 1; i <= this.winNumber; i++){
 			int numCon = 0;
+			//calculate the number of connections i long for each player and add a weighted sum to the heuristic
 			numCon = checkConnect(this, i);
 			heur += (numCon * i);
 		}
@@ -88,6 +96,7 @@ public class OurStateTree extends StateTree implements Cloneable {
 	}
 
 	// This counts how many n-in-a-rows each player has
+	//copied from Referee.java by Ethan Prihar
 	public static int checkConnect(StateTree board, int n)
 	{
 		int winner = 0;
