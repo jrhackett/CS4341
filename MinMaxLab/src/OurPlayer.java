@@ -11,37 +11,37 @@ public class OurPlayer extends Player {
 		//using custom state so we have better methods available to us, initializing using the RefereeBoard
 		OurStateTree betterState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state.parent);
 
-		//betterState.initChildren();
 		//get the best move
-		int move = minimax(betterState, 0, this.turn, Integer.MIN_VALUE, Integer.MAX_VALUE);
+		int move = minimax(betterState, 0, -1000000, 1000000);
+		
+		System.out.println("move: " + move);
 		
 		for(OurStateTree s : betterState.childrenStates) {
-			if(s.bestValue == move) {
-//				return s.startingMove;
-				
+//			System.out.println(s.bestValue + " col: " + s.startingMove.column);
+			
+			if(s.bestValue == move && betterState.checkFullColumn(s.startingMove.column)) {
+				return s.startingMove;
 			}
-//			System.out.println(s.bestValue);
 		}
 		
 		return new Move(false, -1);
 	}
 
-	private int minimax(OurStateTree state, int depth, int t, int alpha, int beta) {
+	private int minimax(OurStateTree state, int depth, int alpha, int beta) {
 		
 		if(depth == 5) {
 			state.bestValue = this.eval(state);
-			System.out.println("end: " + state.bestValue);
 			return state.bestValue;
 		}
 		
 		state.initChildren();
 		
-		if(t == 1) {
+		if(state.turn == 1) {
 			for(OurStateTree s : state.childrenStates) {
-				int current = minimax(s, depth + 1, 2, alpha, beta);
-
+				int current = minimax(s, depth + 1, alpha, beta);
+//				System.out.println("Comparing: " + state.bestValue + " " + current + " " + t);
 				if(current > state.bestValue) {
-					System.out.println("I changed: " + state.bestValue + " " + current);
+//					System.out.println("I changed: " + state.bestValue + " " + current);
 					state.bestValue = current;
 					
 				}
@@ -58,9 +58,11 @@ public class OurPlayer extends Player {
 		
 		else {
 			for(OurStateTree s : state.childrenStates) {
-				int current = minimax(s, depth + 1, 1, alpha, beta);
+				int current = minimax(s, depth + 1, alpha, beta);
 
+//				System.out.println("Comparing: " + state.bestValue + " " + current + " " + t);
 				if(current < state.bestValue) {
+//					System.out.println("I changed: " + state.bestValue + " " + current);
 					state.bestValue = current;
 				}			
 //				if(current < beta) {

@@ -10,7 +10,7 @@ public class OurStateTree extends StateTree implements Cloneable {
 		super(r, c, w, t, p1, p2, p);
 		startingMove = new Move(false, -1);
 		childrenStates = new ArrayList<OurStateTree>();
-		bestValue = t == 1 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+		bestValue = t == 1 ? -1000000 : 1000000;
 	}
 	
 	//returns an ArrayList of all valid moves on the board, does not include pops right now
@@ -19,7 +19,8 @@ public class OurStateTree extends StateTree implements Cloneable {
 		for(int i = 0; i < this.columns; i++) {
 			for(int j = this.rows - 1; j > 0; j--) {
 				if(this.boardMatrix[j][i] == 0) {
-					moves.add(new Move(false, i));
+					moves.add(new Move(false, i)); 
+//					System.out.println("adding move col: " + i);
 					break;
 				}
 			}
@@ -59,6 +60,7 @@ public class OurStateTree extends StateTree implements Cloneable {
 		for(Move m : this.getMoves()) {
 			OurStateTree newState = OurStateTree.copy(this);
 			newState.makeMove(m);
+			newState.bestValue = newState.turn == 1 ? -1000000 : 1000000;
 			startingMove = m;
 			states.add(newState);
 		}
@@ -66,12 +68,21 @@ public class OurStateTree extends StateTree implements Cloneable {
 	}
 	
 	public static OurStateTree copy(OurStateTree state) {
-		OurStateTree newState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state.parent);
+		OurStateTree newState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state);
 		for(int i = 0; i < newState.rows; i++) {
 			for(int j = 0; j < newState.columns; j++) {
 				newState.boardMatrix[i][j] = state.boardMatrix[i][j];
 			}
 		}
 		return newState;
+	}
+	
+	public boolean checkFullColumn(int col) {
+		for(int i = 0; i < this.columns; i++) {
+			if(this.boardMatrix[i][col] == 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
