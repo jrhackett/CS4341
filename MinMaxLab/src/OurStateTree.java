@@ -61,7 +61,7 @@ public class OurStateTree extends StateTree implements Cloneable {
 			OurStateTree newState = OurStateTree.copy(this);
 			newState.makeMove(m);
 			newState.bestValue = newState.turn == 1 ? -1000000 : 1000000;
-			startingMove = m;
+			newState.startingMove = m;
 			states.add(newState);
 		}
 		return states;
@@ -75,14 +75,5 @@ public class OurStateTree extends StateTree implements Cloneable {
 			}
 		}
 		return newState;
-	}
-	
-	public boolean checkFullColumn(int col) {
-		for(int i = 0; i < this.columns; i++) {
-			if(this.boardMatrix[i][col] == 0) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

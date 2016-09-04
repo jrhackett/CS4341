@@ -17,9 +17,11 @@ public class OurPlayer extends Player {
 		System.out.println("move: " + move);
 		
 		for(OurStateTree s : betterState.childrenStates) {
-//			System.out.println(s.bestValue + " col: " + s.startingMove.column);
-			
-			if(s.bestValue == move && betterState.checkFullColumn(s.startingMove.column)) {
+			System.out.println(s.bestValue + " col: " + s.startingMove.column);
+		}
+		
+		for(OurStateTree s : betterState.childrenStates) {
+			if(s.bestValue == move) {
 				return s.startingMove;
 			}
 		}
@@ -29,7 +31,7 @@ public class OurPlayer extends Player {
 
 	private int minimax(OurStateTree state, int depth, int alpha, int beta) {
 		
-		if(depth == 5) {
+		if(depth == 7) {
 			state.bestValue = this.eval(state);
 			return state.bestValue;
 		}
@@ -39,11 +41,10 @@ public class OurPlayer extends Player {
 		if(state.turn == 1) {
 			for(OurStateTree s : state.childrenStates) {
 				int current = minimax(s, depth + 1, alpha, beta);
-//				System.out.println("Comparing: " + state.bestValue + " " + current + " " + t);
+//				System.out.println("Comparing: " + state.bestValue + " " + current + " " + state.turn);
 				if(current > state.bestValue) {
 //					System.out.println("I changed: " + state.bestValue + " " + current);
 					state.bestValue = current;
-					
 				}
 //				if(current > alpha) {
 //					alpha = current;
@@ -60,7 +61,7 @@ public class OurPlayer extends Player {
 			for(OurStateTree s : state.childrenStates) {
 				int current = minimax(s, depth + 1, alpha, beta);
 
-//				System.out.println("Comparing: " + state.bestValue + " " + current + " " + t);
+//				System.out.println("Comparing: " + state.bestValue + " " + current + " " + state.turn);
 				if(current < state.bestValue) {
 //					System.out.println("I changed: " + state.bestValue + " " + current);
 					state.bestValue = current;
