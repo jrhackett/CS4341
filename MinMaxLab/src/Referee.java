@@ -7,6 +7,7 @@
  * @author Ethan Prihar
  *
  */
+
 public class Referee
 {
 	// CHANGE THESE VALUES
@@ -25,12 +26,14 @@ public class Referee
 		board = new RefereeBoard(boardRows, boardColumns, winNumber, 1, false, false, null);
 		Move move = null;
 		int winner = 0;
+	
+		  
 		// This while loop runs until there is a winner
 		while(winner == 0)
 		{
 			if(board.turn == 1) // Player 1's turn
 			{
-				System.out.println(player1.name + "'s turn:");
+				//System.out.println(player1.name + "'s turn:");
 				long start = System.currentTimeMillis();
 				move = player1.getMove(board);
 				long stop = System.currentTimeMillis();
@@ -81,7 +84,7 @@ public class Referee
 					action = " popped a piece from column ";
 				else
 					action = " placed a piece in column ";
-				System.out.println(player2.name + action + move.column + ".");
+			System.out.println(player2.name + action + move.column + ".");
 			}
 			board.makeMove(move); // Makes the move after checking if it was valid
 			board.display(); // Prints the board

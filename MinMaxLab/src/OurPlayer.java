@@ -12,17 +12,19 @@ public class OurPlayer extends Player {
 	//OurPlayer is just our implementation of the Player class
 	public OurPlayer(String n, int t, int l) {
 		super(n, t, l);
-		if(t >= 15) {
-			this.maxDepth = 11;
+		
+		//sets the max depth, determined by experimentation
+		if(t >= 8) {
+			this.maxDepth = 10;//<10 crashed computer
 		}
-		else if(t >= 10) {
-			this.maxDepth = 10;
-		}
-		else if(t >= 5) {
+		else if(t >= 7) {
 			this.maxDepth = 9;
 		}
-		else {
+		else if(t >= 1) {
 			this.maxDepth = 8;
+		}
+		else {
+			this.maxDepth = 7;
 		}
 	}
 
