@@ -7,17 +7,17 @@
 
 import java.util.ArrayList;
 
-public class OurStateTree extends StateTree implements Cloneable {
+public class OurStateTreeJHTR extends StateTree implements Cloneable {
 	
 	Move startingMove;
 	int bestValue;
-	ArrayList<OurStateTree> childrenStates;
+	ArrayList<OurStateTreeJHTR> childrenStates;
 	
 	//our state tree implementation, init values
-	public OurStateTree(int r, int c, int w, int t, boolean p1, boolean p2, StateTree p, int[][] board) {
+	public OurStateTreeJHTR(int r, int c, int w, int t, boolean p1, boolean p2, StateTree p, int[][] board) {
 		super(r, c, w, t, p1, p2, p);
 		startingMove = new Move(false, -1);
-		childrenStates = new ArrayList<OurStateTree>();
+		childrenStates = new ArrayList<OurStateTreeJHTR>();
 		bestValue = t == 1 ? -1000000 : 1000000;
 		for(int i = 0; i < this.rows; i++) {
 			for(int j = 0; j < this.columns; j++) {
@@ -67,11 +67,11 @@ public class OurStateTree extends StateTree implements Cloneable {
 	}
 	
 	//generates all valid children states for this board using the getMoves
-	private ArrayList<OurStateTree> generateChildStates() {
-		ArrayList<OurStateTree> states = new ArrayList<OurStateTree>();
+	private ArrayList<OurStateTreeJHTR> generateChildStates() {
+		ArrayList<OurStateTreeJHTR> states = new ArrayList<OurStateTreeJHTR>();
 		//for every move in get moves, generate a child state
 		for(Move m : this.getMoves()) {
-			OurStateTree newState = OurStateTree.copy(this);
+			OurStateTreeJHTR newState = OurStateTreeJHTR.copy(this);
 			newState.makeMove(m);
 			//initializes bestValue to max or min depending on the turn
 			newState.bestValue = newState.turn == 1 ? -1000000 : 1000000;
@@ -82,9 +82,9 @@ public class OurStateTree extends StateTree implements Cloneable {
 	}
 	
 	//returns a copy of this tree so we're not messing with java pointers
-	public static OurStateTree copy(OurStateTree state) {
+	public static OurStateTreeJHTR copy(OurStateTreeJHTR state) {
 		//init newState with new OurStateTree
-		OurStateTree newState = new OurStateTree(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state, state.boardMatrix);
+		OurStateTreeJHTR newState = new OurStateTreeJHTR(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state, state.boardMatrix);
 		//for every spot in boardmatrix, copy that value to the newStates boardMatrix
 		for(int i = 0; i < newState.rows; i++) {
 			for(int j = 0; j < newState.columns; j++) {
