@@ -18,7 +18,7 @@ def main(argv):
 	hiddenNodes = args[1]
 	holdout = args[2]
 
-	print inputFile, hiddenNodes, holdout
+	print inputFile, hiddenNodes, holdout 
 
 	a = readData(inputFile)
 	print a
