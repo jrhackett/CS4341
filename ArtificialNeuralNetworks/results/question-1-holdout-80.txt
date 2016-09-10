@@ -1,0 +1,268 @@
+Input file: hw5data.txt
+Number of hidden nodes: 5
+Holdout percent: 0.8
+Starting Training
+Errors shown below:
+error 5.55125
+error 4.51008
+error 4.03599
+error 3.79474
+error 3.60972
+error 3.47344
+error 3.36950
+error 3.28008
+error 3.21404
+error 3.15496
+error 3.10676
+error 3.06930
+error 3.02624
+error 2.99510
+error 2.96219
+error 2.93685
+error 2.91167
+error 2.89005
+error 2.86743
+error 2.84988
+error 2.83517
+error 2.82446
+error 2.80393
+error 2.79401
+error 2.78718
+error 2.78018
+error 2.76729
+error 2.76281
+error 2.75615
+error 2.74881
+error 2.74348
+error 2.73723
+error 2.73327
+error 2.73109
+error 2.72810
+error 2.72341
+error 2.71520
+error 2.71560
+error 2.71189
+error 2.70754
+error 2.70687
+error 2.69913
+error 2.69678
+error 2.69948
+error 2.69422
+error 2.69209
+error 2.68591
+error 2.68409
+error 2.68252
+error 2.68409
+error 2.67834
+error 2.67684
+error 2.67110
+error 2.67432
+error 2.67131
+error 2.66641
+error 2.66717
+error 2.66482
+error 2.66281
+error 2.66007
+error 2.65767
+error 2.65797
+error 2.65761
+error 2.65230
+error 2.65479
+error 2.65149
+error 2.65085
+error 2.65049
+error 2.64823
+error 2.64746
+error 2.64900
+error 2.64391
+error 2.64628
+error 2.64081
+error 2.64021
+error 2.63685
+error 2.63796
+error 2.63750
+error 2.63549
+error 2.63446
+error 2.63412
+error 2.63394
+error 2.63185
+error 2.63104
+error 2.62921
+error 2.62818
+error 2.62768
+error 2.62688
+error 2.62500
+error 2.62712
+error 2.62201
+error 2.62502
+error 2.62200
+error 2.62353
+error 2.61921
+error 2.61886
+error 2.61879
+error 2.61874
+error 2.61818
+error 2.61596
+Starting Testing
+True value -> Rounded Prediction from Unrounded Prediction
+1 -> 1 from 0.79987
+0 -> 0 from 0.35427
+1 -> 0 from 0.35386
+1 -> 0 from 0.35686
+0 -> 0 from 0.37536
+1 -> 1 from 0.91854
+0 -> 0 from 0.34888
+0 -> 0 from 0.35144
+0 -> 0 from 0.36076
+1 -> 1 from 0.71790
+1 -> 0 from 0.47174
+1 -> 0 from 0.44401
+0 -> 0 from 0.35404
+1 -> 1 from 0.87375
+1 -> 1 from 0.67751
+1 -> 0 from 0.36755
+0 -> 0 from 0.36318
+0 -> 0 from 0.35434
+0 -> 0 from 0.35070
+0 -> 0 from 0.40149
+1 -> 0 from 0.34852
+1 -> 0 from 0.34801
+1 -> 1 from 0.77633
+1 -> 1 from 0.90923
+0 -> 0 from 0.38786
+1 -> 0 from 0.35145
+0 -> 0 from 0.36656
+0 -> 0 from 0.34888
+1 -> 0 from 0.35137
+0 -> 1 from 0.78633
+1 -> 1 from 0.93755
+1 -> 0 from 0.34864
+1 -> 0 from 0.36730
+1 -> 0 from 0.34895
+1 -> 0 from 0.42648
+1 -> 0 from 0.35026
+1 -> 0 from 0.37962
+0 -> 0 from 0.34977
+1 -> 1 from 0.92333
+1 -> 1 from 0.94185
+0 -> 0 from 0.40481
+0 -> 0 from 0.39356
+0 -> 0 from 0.40314
+0 -> 0 from 0.46774
+1 -> 1 from 0.93839
+0 -> 0 from 0.35768
+0 -> 0 from 0.36829
+1 -> 1 from 0.92008
+1 -> 0 from 0.36543
+1 -> 1 from 0.92654
+1 -> 1 from 0.84029
+0 -> 1 from 0.67075
+1 -> 1 from 0.86206
+1 -> 1 from 0.92061
+1 -> 1 from 0.56880
+1 -> 0 from 0.35235
+0 -> 0 from 0.35344
+1 -> 1 from 0.73321
+0 -> 0 from 0.36339
+1 -> 0 from 0.38550
+1 -> 0 from 0.38221
+0 -> 0 from 0.42034
+0 -> 0 from 0.36186
+0 -> 0 from 0.37167
+1 -> 0 from 0.35079
+1 -> 1 from 0.91048
+0 -> 1 from 0.55043
+1 -> 1 from 0.87996
+0 -> 0 from 0.44517
+1 -> 1 from 0.94034
+0 -> 1 from 0.59593
+1 -> 0 from 0.36954
+0 -> 0 from 0.37709
+0 -> 0 from 0.35016
+0 -> 0 from 0.35703
+0 -> 0 from 0.35591
+0 -> 1 from 0.69496
+0 -> 0 from 0.38208
+1 -> 0 from 0.40093
+1 -> 0 from 0.44254
+1 -> 1 from 0.94270
+1 -> 1 from 0.86783
+1 -> 1 from 0.53698
+1 -> 0 from 0.35441
+0 -> 0 from 0.44608
+0 -> 1 from 0.89994
+1 -> 1 from 0.87356
+1 -> 0 from 0.35737
+0 -> 0 from 0.36590
+1 -> 1 from 0.89887
+1 -> 1 from 0.92566
+0 -> 0 from 0.40486
+1 -> 1 from 0.77255
+0 -> 1 from 0.90257
+1 -> 0 from 0.42377
+1 -> 1 from 0.59575
+1 -> 0 from 0.36847
+0 -> 0 from 0.35384
+0 -> 0 from 0.34826
+1 -> 1 from 0.80644
+0 -> 0 from 0.42427
+1 -> 0 from 0.44389
+0 -> 1 from 0.59218
+0 -> 0 from 0.37048
+0 -> 1 from 0.51870
+0 -> 0 from 0.36625
+1 -> 0 from 0.34839
+1 -> 1 from 0.94165
+0 -> 0 from 0.36122
+1 -> 1 from 0.93668
+0 -> 0 from 0.34799
+0 -> 0 from 0.41748
+0 -> 0 from 0.35491
+0 -> 1 from 0.63403
+1 -> 0 from 0.35271
+0 -> 0 from 0.34948
+0 -> 0 from 0.34844
+0 -> 0 from 0.34837
+0 -> 0 from 0.34983
+1 -> 1 from 0.91172
+1 -> 1 from 0.80666
+1 -> 1 from 0.93908
+0 -> 1 from 0.62065
+0 -> 0 from 0.46010
+1 -> 1 from 0.89038
+0 -> 0 from 0.39063
+0 -> 0 from 0.34900
+0 -> 0 from 0.35727
+0 -> 0 from 0.35052
+0 -> 0 from 0.34859
+1 -> 1 from 0.79417
+1 -> 0 from 0.35268
+1 -> 0 from 0.40898
+1 -> 1 from 0.83481
+0 -> 1 from 0.55687
+0 -> 0 from 0.34869
+0 -> 0 from 0.39286
+0 -> 0 from 0.34823
+0 -> 0 from 0.37302
+1 -> 1 from 0.78752
+0 -> 1 from 0.52709
+0 -> 0 from 0.35014
+0 -> 0 from 0.34932
+0 -> 1 from 0.53187
+0 -> 0 from 0.46184
+0 -> 0 from 0.36960
+1 -> 1 from 0.85019
+0 -> 0 from 0.35782
+0 -> 0 from 0.35800
+1 -> 0 from 0.47435
+0 -> 0 from 0.35196
+0 -> 0 from 0.43084
+1 -> 1 from 0.93903
+0 -> 0 from 0.35091
+1 -> 0 from 0.45421
+1 -> 0 from 0.35543
+0 -> 1 from 0.85801
+0 -> 0 from 0.35637
+0 -> 1 from 0.69918
+0 -> 0 from 0.36358
+Percent correct: 68.125

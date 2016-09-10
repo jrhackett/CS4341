@@ -1,0 +1,228 @@
+Input file: hw5data.txt
+Number of hidden nodes: 5
+Holdout percent: 0.6
+Starting Training
+Errors shown below:
+error 12.38185
+error 10.77575
+error 9.25705
+error 8.72259
+error 8.49565
+error 8.37542
+error 8.30722
+error 8.23049
+error 8.19204
+error 8.13765
+error 8.10429
+error 8.06616
+error 8.03420
+error 8.01129
+error 7.98459
+error 7.94587
+error 7.94843
+error 7.92443
+error 7.90323
+error 7.89212
+error 7.87475
+error 7.86433
+error 7.84814
+error 7.84066
+error 7.82463
+error 7.81549
+error 7.80842
+error 7.80121
+error 7.78780
+error 7.78518
+error 7.77390
+error 7.77104
+error 7.76635
+error 7.75391
+error 7.75660
+error 7.75257
+error 7.74538
+error 7.73865
+error 7.73362
+error 7.73079
+error 7.72072
+error 7.72221
+error 7.71942
+error 7.71885
+error 7.71587
+error 7.71591
+error 7.70750
+error 7.70921
+error 7.70506
+error 7.69682
+error 7.69459
+error 7.69609
+error 7.69023
+error 7.68837
+error 7.68527
+error 7.69257
+error 7.67999
+error 7.67597
+error 7.68225
+error 7.67136
+error 7.66680
+error 7.67265
+error 7.66661
+error 7.67247
+error 7.66883
+error 7.65985
+error 7.66444
+error 7.66159
+error 7.65790
+error 7.66028
+error 7.65249
+error 7.64814
+error 7.65058
+error 7.65375
+error 7.65511
+error 7.64351
+error 7.65607
+error 7.64837
+error 7.65199
+error 7.64803
+error 7.64953
+error 7.64727
+error 7.64791
+error 7.63926
+error 7.64602
+error 7.63617
+error 7.63840
+error 7.63696
+error 7.63689
+error 7.63971
+error 7.63083
+error 7.63817
+error 7.63051
+error 7.63688
+error 7.63312
+error 7.63386
+error 7.63103
+error 7.62951
+error 7.63296
+error 7.62978
+Starting Testing
+True value -> Rounded Prediction from Unrounded Prediction
+1 -> 0 from 0.31857
+0 -> 0 from 0.46806
+1 -> 1 from 0.83461
+1 -> 1 from 0.83617
+0 -> 0 from 0.33892
+0 -> 0 from 0.33917
+0 -> 0 from 0.32971
+0 -> 1 from 0.62152
+0 -> 0 from 0.31559
+1 -> 0 from 0.32824
+0 -> 0 from 0.38651
+0 -> 0 from 0.36977
+0 -> 0 from 0.31959
+1 -> 1 from 0.87944
+1 -> 1 from 0.83588
+1 -> 1 from 0.73994
+1 -> 1 from 0.86089
+0 -> 1 from 0.69165
+1 -> 0 from 0.36866
+0 -> 1 from 0.61407
+0 -> 0 from 0.41164
+0 -> 1 from 0.76571
+0 -> 0 from 0.41361
+0 -> 0 from 0.35981
+0 -> 0 from 0.37239
+1 -> 1 from 0.60588
+1 -> 1 from 0.85615
+0 -> 0 from 0.37978
+0 -> 0 from 0.33816
+1 -> 0 from 0.37050
+1 -> 1 from 0.84698
+0 -> 0 from 0.38241
+0 -> 0 from 0.34037
+1 -> 1 from 0.80637
+1 -> 1 from 0.86462
+1 -> 0 from 0.33900
+0 -> 0 from 0.33665
+1 -> 1 from 0.87739
+1 -> 1 from 0.51914
+1 -> 0 from 0.33770
+1 -> 0 from 0.39277
+0 -> 0 from 0.35116
+1 -> 1 from 0.85776
+1 -> 1 from 0.87892
+0 -> 1 from 0.52779
+0 -> 0 from 0.32200
+1 -> 1 from 0.61577
+0 -> 0 from 0.49923
+0 -> 0 from 0.49138
+0 -> 1 from 0.61995
+1 -> 1 from 0.88545
+0 -> 1 from 0.76976
+0 -> 0 from 0.45585
+0 -> 0 from 0.35891
+1 -> 1 from 0.81515
+1 -> 1 from 0.88162
+0 -> 0 from 0.46732
+1 -> 1 from 0.88735
+1 -> 1 from 0.87303
+1 -> 1 from 0.88306
+0 -> 1 from 0.56147
+1 -> 0 from 0.47589
+0 -> 0 from 0.31461
+1 -> 1 from 0.88419
+0 -> 0 from 0.32627
+1 -> 0 from 0.45515
+1 -> 1 from 0.88202
+0 -> 0 from 0.44986
+0 -> 0 from 0.47625
+1 -> 0 from 0.32967
+0 -> 0 from 0.32613
+0 -> 1 from 0.61007
+1 -> 1 from 0.87903
+1 -> 1 from 0.87305
+0 -> 1 from 0.67117
+0 -> 0 from 0.34467
+1 -> 1 from 0.88480
+1 -> 1 from 0.77430
+0 -> 1 from 0.70871
+1 -> 1 from 0.83641
+1 -> 1 from 0.85677
+0 -> 1 from 0.74365
+1 -> 1 from 0.85740
+1 -> 0 from 0.31874
+0 -> 0 from 0.32116
+0 -> 0 from 0.34157
+0 -> 0 from 0.36114
+0 -> 0 from 0.32856
+0 -> 0 from 0.32067
+0 -> 0 from 0.31806
+0 -> 0 from 0.36903
+1 -> 0 from 0.35438
+0 -> 1 from 0.73490
+0 -> 0 from 0.31573
+0 -> 0 from 0.31916
+0 -> 0 from 0.34094
+0 -> 0 from 0.41216
+1 -> 1 from 0.88631
+1 -> 0 from 0.45905
+0 -> 1 from 0.50117
+0 -> 0 from 0.35915
+0 -> 0 from 0.37069
+0 -> 0 from 0.31837
+0 -> 0 from 0.34792
+1 -> 1 from 0.83861
+1 -> 1 from 0.50580
+0 -> 0 from 0.31559
+0 -> 1 from 0.62427
+1 -> 1 from 0.87911
+0 -> 0 from 0.31603
+0 -> 0 from 0.33122
+0 -> 0 from 0.38125
+0 -> 1 from 0.55782
+1 -> 0 from 0.44663
+0 -> 0 from 0.47953
+1 -> 1 from 0.86611
+0 -> 0 from 0.34965
+1 -> 1 from 0.86473
+1 -> 1 from 0.88646
+1 -> 0 from 0.40135
+Percent correct: 74.1666666667

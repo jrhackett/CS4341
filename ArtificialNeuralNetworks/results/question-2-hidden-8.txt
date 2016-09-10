@@ -1,0 +1,148 @@
+Input file: hw5data.txt
+Number of hidden nodes: 8
+Holdout percent: 0.2
+Starting Training
+Errors shown below:
+error 18.27406
+error 14.76179
+error 13.89813
+error 13.85608
+error 13.62983
+error 13.45417
+error 13.39960
+error 13.26525
+error 13.19764
+error 13.10832
+error 13.04616
+error 12.95526
+error 12.94378
+error 12.89310
+error 12.84013
+error 12.80358
+error 12.77009
+error 12.70300
+error 12.70806
+error 12.62794
+error 12.62342
+error 12.64018
+error 12.59316
+error 12.57757
+error 12.53942
+error 12.53661
+error 12.52496
+error 12.50777
+error 12.48135
+error 12.46156
+error 12.45650
+error 12.42631
+error 12.43021
+error 12.40158
+error 12.39669
+error 12.37404
+error 12.36428
+error 12.35563
+error 12.35213
+error 12.34078
+error 12.30924
+error 12.31561
+error 12.29040
+error 12.25706
+error 12.28046
+error 12.25677
+error 12.25583
+error 12.24474
+error 12.22129
+error 12.20048
+error 12.21017
+error 12.18650
+error 12.18296
+error 12.17821
+error 12.16067
+error 12.16212
+error 12.15128
+error 12.14722
+error 12.12151
+error 12.12168
+error 12.11329
+error 12.10802
+error 12.10333
+error 12.10797
+error 12.09731
+error 12.09275
+error 12.08815
+error 12.08409
+error 12.06282
+error 12.06850
+error 12.05632
+error 12.06438
+error 12.04503
+error 12.04692
+error 12.04389
+error 12.03733
+error 12.03434
+error 12.02255
+error 12.02439
+error 12.00991
+error 12.01765
+error 12.02099
+error 12.00786
+error 12.00110
+error 11.99313
+error 11.98602
+error 11.98532
+error 11.97969
+error 11.98579
+error 11.97632
+error 11.97264
+error 11.97822
+error 11.96575
+error 11.96247
+error 11.95149
+error 11.95684
+error 11.96005
+error 11.94874
+error 11.93655
+error 11.94158
+Starting Testing
+True value -> Rounded Prediction from Unrounded Prediction
+1 -> 1 from 0.53717
+1 -> 0 from 0.23138
+1 -> 1 from 0.80435
+1 -> 1 from 0.86846
+1 -> 1 from 0.86676
+0 -> 0 from 0.22535
+1 -> 1 from 0.85296
+0 -> 1 from 0.64398
+0 -> 0 from 0.11573
+1 -> 0 from 0.24805
+0 -> 0 from 0.34044
+1 -> 0 from 0.37466
+1 -> 0 from 0.24917
+1 -> 1 from 0.86183
+1 -> 1 from 0.55045
+0 -> 0 from 0.29890
+0 -> 0 from 0.33431
+0 -> 1 from 0.58207
+1 -> 0 from 0.40220
+1 -> 1 from 0.86010
+1 -> 0 from 0.44901
+0 -> 0 from 0.08833
+1 -> 1 from 0.86993
+1 -> 1 from 0.86003
+0 -> 1 from 0.85270
+0 -> 0 from 0.20495
+0 -> 0 from 0.26422
+0 -> 0 from 0.31924
+0 -> 0 from 0.27428
+1 -> 0 from 0.13525
+0 -> 0 from 0.13233
+1 -> 0 from 0.23213
+1 -> 1 from 0.87006
+0 -> 0 from 0.16930
+0 -> 0 from 0.30487
+1 -> 0 from 0.22650
+1 -> 1 from 0.83548
+1 -> 1 from 0.55023
+0 -> 0 from 0.21306
+0 -> 0 from 0.28691
+Percent correct: 70.0
