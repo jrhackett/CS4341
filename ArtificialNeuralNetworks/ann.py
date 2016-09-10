@@ -1,6 +1,7 @@
 
 import sys, getopt
 from helpers import readData
+from neuralnet import NeuralNet
 
 def main(argv):
 	inputFile = ''
@@ -21,7 +22,10 @@ def main(argv):
 	print inputFile, hiddenNodes, holdout 
 
 	a = readData(inputFile)
-	print a
+
+	neuralNet = NeuralNet(2, int(hiddenNodes), 1, iterations = 50, learning = 0.5, momentum = 0.5, decay = 0.01)
+	neuralNet.train(a)
+	neuralNet.test(a)
 
 
 if __name__ == "__main__":
