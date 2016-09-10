@@ -15,6 +15,12 @@ random
 
 python ann.py <inputFilePath> <numberOfHiddenNodes> <holdOutPercent>
 
+## Results
+
+Results of our several experiments can be seen in the results folder. These experiments are detailed
+in the project writeup. We essentially ran tests and changed the holdout percent and number of hidden
+nodes to observe the results that would have on the percent of correct predictions.
+
 ## Credits
 
 Jacob Hackett
