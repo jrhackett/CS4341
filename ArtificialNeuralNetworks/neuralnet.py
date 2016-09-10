@@ -133,7 +133,7 @@ class NeuralNet:
 		for p in pattern:
 			prediction = self.feedForward(p[0])
 			rounded = self.round(prediction)
-			print int(p[1][0]), '->', rounded, 'from', prediction
+			print int(p[1][0]), '->', rounded, 'from %-.5f' % prediction[0]
 			if(int(p[1][0]) == rounded):
 				correct += 1.0
 			total += 1.0
