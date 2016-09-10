@@ -1,7 +1,6 @@
 
 import numpy as np
 import random
-import matplotlib.pyplot as plt
 
 
 def sigmoid(x):
@@ -101,8 +100,16 @@ class NeuralNet:
 			error += 0.5 * (target[i] - self.arrayOut[i]) ** 2
 		return error
 
+	def round(self, n):
+		if n[0] >= 0.5:
+			return 1
+		elif n[0] < 0.5:
+			return 0
+
 	# train the neural network
 	def train(self, pattern):
+		print 'Starting Training'
+		print 'Errors shown below:'
 		for i in range(self.iterations):
 			error = 0.0 
 			# shuffle the pattern for randomness
@@ -113,18 +120,28 @@ class NeuralNet:
 				target = p[1]
 				self.feedForward(inputs)
 				error += self.backProp(target)
-			if i % 10 == 0:
-				print('error %-.5f' % error)
+			#printing errors to stdout
+			print 'error %-.5f' % error
 			#update learning rate due to decay
 			self.learning = self.learning * (self.learning / (self.learning + (self.learning * self.decay)))
 
 	def test(self, pattern):
+		print 'Starting Testing'
+		print 'True value -> Rounded Prediction from Unrounded Prediction'
+		total = 0.0
+		correct = 0.0
 		for p in pattern:
-			print(p[1], '->', self.feedForward(p[0]))
+			prediction = self.feedForward(p[0])
+			rounded = self.round(prediction)
+			print int(p[1][0]), '->', rounded, 'from', prediction
+			if(int(p[1][0]) == rounded):
+				correct += 1.0
+			total += 1.0
+		print 'Percent correct:', (correct / total) * 100
 
-	# generate predictions
+	# generate predictions for any set of input data
 	def predict(self, data):
 		predictions = []
 		for p in data:
-			predictions.append(self.feedForward(p))
+			predictions.append(self.round(self.feedForward(p)))
 		return predictions	

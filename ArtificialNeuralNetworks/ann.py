@@ -1,5 +1,5 @@
 
-import sys, getopt
+import sys, getopt, random
 from helpers import readData
 from neuralnet import NeuralNet
 
@@ -17,15 +17,20 @@ def main(argv):
 		sys.exit(2)
 	inputFile = args[0]
 	hiddenNodes = args[1]
-	holdout = args[2]
+	holdout = float(args[2])
 
-	print inputFile, hiddenNodes, holdout 
+	print 'Input file:', inputFile
+	print 'Number of hidden nodes:', hiddenNodes
+	print "Holdout percent:", holdout
 
 	a = readData(inputFile)
+	random.shuffle(a)
+	testingSet = a[0 : int(len(a) * holdout)]
+	trainingSet = a[int(len(a) * holdout):]
 
-	neuralNet = NeuralNet(2, int(hiddenNodes), 1, iterations = 50, learning = 0.5, momentum = 0.5, decay = 0.01)
-	neuralNet.train(a)
-	neuralNet.test(a)
+	neuralNet = NeuralNet(2, int(hiddenNodes), 1, iterations = 100, learning = 0.5, momentum = 0.5, decay = 0.01)
+	neuralNet.train(trainingSet)
+	neuralNet.test(testingSet)
 
 
 if __name__ == "__main__":
