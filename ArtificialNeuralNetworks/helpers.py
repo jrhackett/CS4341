@@ -5,5 +5,5 @@ def readData(file):
 	with open(file, 'r') as f:
 		for line in f:
 			l = line.split()
-			a.append(DataPoint(l[0], l[1], l[2]))
+			a.append(DataPoint(float(l[0]), float(l[1]), float(l[2])))
 	return a

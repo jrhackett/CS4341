@@ -38,21 +38,21 @@ class NeuralNet:
 		self.ci = np.zeros((self.input, self.hidden))
 		self.co = np.zeros((self.input, self.hidden))
 
-	# updating the weights depending on how wrong we were in what direction
+	# sums the outputs of each layer so we can figure out the error and adjust weights in backprop
 	def feedForward(self, inputs):
 		# error check to prevent incorrect input
-		if len(inputs) != self.input - 1.0:
+		if len(inputs) != self.input - 1:
 			raise ValueError('error')
 
 		#activate input layer
-		for i in range(self.input - 1.0):
+		for i in range(self.input - 1):
 			self.arrayIn[i] = inputs[i]
 
 		#activate hidden layer
 		for i in range(self.hidden):
 			sum = 0.0 
 			for j in range(self.input):
-				sum += self.arrayIn[j] * self.weightIn[j][i]
+				sum += float(self.arrayIn[j]) * float(self.weightIn[j][i])
 			self.arrayHidden[i] = sigmoid(sum)
 
 		# activate output layer
@@ -77,7 +77,7 @@ class NeuralNet:
 		# calculate error for output nodes
 		deltaOut = [0.0] * self.output
 		for i in range(self.output):
-			error = -(target[i] - self.arrayOut[i])
+			error = -(float(target[i]) - float(self.arrayOut[i]))
 			deltaOut[i] = dsigmoid(self.arrayOut[i]) * error
 
 		# calculate error for hidden nodes
@@ -92,7 +92,7 @@ class NeuralNet:
 		for i in range(self.input):
 			for j in range(self.hidden):
 				change = deltaHidden[j] * self.arrayIn[i]
-				self.weightIn[i][j] -= self.learning * change + self.ci[i][j] * self.momentum
+				self.weightIn[i][j] -= float(self.learning) * float(change) + float(self.ci[i][j]) * float(self.momentum)
 				self.ci[i][j] = change
 
 		# calculate error
@@ -101,7 +101,7 @@ class NeuralNet:
 			error += 0.5 * (target[i] - self.arrayOut[i]) ** 2
 		return error
 
-	# train our NN
+	# train the neural network
 	def train(self, pattern):
 		for i in range(self.iterations):
 			error = 0.0 
@@ -117,6 +117,10 @@ class NeuralNet:
 				print('error %-.5f' % error)
 			#update learning rate due to decay
 			self.learning = self.learning * (self.learning / (self.learning + (self.learning * self.decay)))
+
+	def test(self, pattern):
+		for p in pattern:
+			print(p[1], '->', self.feedForward(p[0]))
 
 	# generate predictions
 	def predict(self, data):
