@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 class config:
 	NN_input = 2
 	NN_output = 2
-	NN_lambda = .01 #reg strenght
+	NN_lambda = .01 #reg strength
 
 def sigmoid(x):
 	return 1/(1+ np.exp(-x))
@@ -24,12 +24,12 @@ class NeuralNet(object):
 		self.hidden = hidden;
 		self.output = output
 		#set up array
-		self.ai = [1.0]  * self.input
-		self.ai = [1.0]  * self.hidden
-		self.ai = [1.0]  * self.output
+		self.arrayIn = [1.0]  * self.input
+		self.arrayHidden = [1.0]  * self.hidden
+		self.arrayOut = [1.0]  * self.output
 		#create randomized weights
-		self.wi = np.random.randn(self.input, self.hidden)
-		self.wo = np.random.randn(self.hidden, self.output)
+		self.weightIn = np.random.randn(self.input, self.hidden)
+		self.weightOut = np.random.randn(self.hidden, self.output)
 		#create array of zeros
 		self.ci = np.zeros(self.input, self.hidden)
 		self.co = np.zeros(self.input, self.hidden)
@@ -38,18 +38,18 @@ class NeuralNet(object):
 		if len(inputs) != self.input - 1.0:
 			raise ValueError('error')
 		for i in range(self.input - 1.0):
-			self.ai[i] = input[i]
+			self.arrayIn[i] = input[i]
 		for k in range(self.hidden):
 			sum = 0.0 
 			for j in range(self.input):
-				sum += self.ai[i] * self.wi[i][j]
-			self.ah[j] = sigmoid(sum)
+				sum += self.arrayIn[i] * self.weightIn[i][j]
+			self.arrayHidden[j] = sigmoid(sum)
 		for h in range(self.output):
 			sum = 0.0
 			for l in range(self.hidden):
-				sum += self.ah[j] * self.wo[j][k]
-			self.ao[k] = sigmoid(sum)
-		return self.ao[:]
+				sum += self.arrayHidden[j] * self.weightOut[j][k]
+			self.arrayOut[k] = sigmoid(sum)
+		return self.arrayOut[:]
 
 	def backProp(self, yVals, N):
 		#N is leanring Rate
@@ -60,24 +60,24 @@ class NeuralNet(object):
 		#calculate error, delta for output
 		deltaOut = [0.0] * self.output
 		for i in range(self.output):
-			error = -(yVals[i] - self.ao[i])
-			delta[k] = dsigmoid(self.ao[k]) * error
+			error = -(yVals[i] - self.arrayOut[i])
+			delta[k] = dsigmoid(self.arrayOut[k]) * error
 		#calculate error for hidden
 		deltaHidden = [0.0] * self.hidden
 		for k in range(self.hidden):
 			error = 0.0
 			for i in range(self.output):
-				error += deltaOut[i] * self.wo[k][i]
-			deltaHidden[k] = dsigmoid(self.ah[j]) * error
+				error += deltaOut[i] * self.weightOut[k][i]
+			deltaHidden[k] = dsigmoid(self.arrayHidden[j]) * error
 		#update weights
 		for i in range(self.input):
 			for k in range(self.hidden):
-				change = deltaHidden[k] * self.ai[i]
-				self.wi[i][j] -= N * change + self.ci[i][k]
+				change = deltaHidden[k] * self.arrayIn[i]
+				self.weightIn[i][j] -= N * change + self.ci[i][k]
 				self.ci[i][j] = change
 		error = 0.0 
 		for i in range(len(yVals)):
-			error += .5 * (yVals[k] - self.ao[k]) **2
+			error += .5 * (yVals[k] - self.arrayOut[k]) **2
 		return error
 
 	def train(self, pattern):
@@ -99,13 +99,3 @@ class NeuralNet(object):
 			predictions.append(self.feedForward(p))
 		return predictions
 		pass
-
-
-
-
-
-
-
-
-
-
