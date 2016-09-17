@@ -22,5 +22,15 @@ def readData(inputFile):
 	return boardStates
 
 # calculates entropy based on p and q
-def entropy(p):
-   return -p * math.log(p, 2) - (1 - p) * math.log((1 - p), 2)
+def entropy(board, feature):
+	total = 0
+	correct = 0
+	for state in board:
+		total += 1
+		if(state[42] == state[42 + feature]):
+			correct += 1
+	p = float(correct) / float(total)
+	return -p * math.log(p, 2) - (1 - p) * math.log((1 - p), 2)
+
+def informationgain(parent, left, right, feature):
+	return entropy(parent, feature) - ((entropy(left, feature) + entropy(right, feature)) / 2.0)

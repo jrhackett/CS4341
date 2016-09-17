@@ -2,7 +2,7 @@
 # CS4341 A16 Project 3
 
 import sys, getopt
-from helpers import readData, entropy
+from helpers import readData, entropy, informationgain
 from features import getFeature1, getFeature2, getFeature3, getFeature4, getFeature5
 import numpy as np
 
@@ -38,16 +38,20 @@ def main(argv):
 
 		boardStatesWithFeatures.append(currentState)
 
+	bestIG = 0
+	bestFeature = 0
 	for i in range(1, 6):
-		total = 0
-		correct = 0
+		newLeft = []
+		newRight = []
 		for state in boardStatesWithFeatures:
-			total += 1
-			if(state[42] == state[42 + i]):
-				correct += 1
-		print "Feature:", i, "Percent correct:", float(correct) / float(total)
-
-	print "entropy:", entropy(0.2)
+			if(state[42 + i] == 1):
+				newLeft.append(state)
+			elif(state[42 + i] == 2):
+				newRight.append(state)
+		IG = informationgain(boardStatesWithFeatures, newLeft, newRight, i)
+		if(IG > bestIG):
+			bestIG = IG
+			bestFeature = i
 
 
 if __name__ == "__main__":
