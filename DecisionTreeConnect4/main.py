@@ -10,6 +10,7 @@ def main(argv):
 	inputFile = ''
 	outputFile = ''
 
+	# read in command line arguments and assign input and output file
 	try:
 		opts, args = getopt.getopt(argv, "")
 	except getopt.GetoptError:
@@ -21,13 +22,16 @@ def main(argv):
 	inputFile = args[0]
 	outputFile = args[1]
 	
+	# read in data
 	boardStates = readData(inputFile)
 
+	# split data into training and testing sets, 20% holdout
 	trainingSet = boardStates[0 : int(len(boardStates) * 0.8)]
 	testingSet = boardStates[int(len(boardStates) * 0.8):]
 
 	boardStatesWithFeatures = []
 	
+	# create boardStates with the results from features, using training set only
 	for state in trainingSet:
 		currentState = state
 		currentState.append(getFeature1(state))
@@ -37,6 +41,7 @@ def main(argv):
 		currentState.append(getFeature5(state))
 
 		boardStatesWithFeatures.append(currentState)
+
 
 	bestIG = 0
 	bestFeature = 0
@@ -52,6 +57,8 @@ def main(argv):
 		if(IG > bestIG):
 			bestIG = IG
 			bestFeature = i
+	print bestFeature, bestIG
+
 
 
 if __name__ == "__main__":
