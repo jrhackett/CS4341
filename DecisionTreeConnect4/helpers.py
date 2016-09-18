@@ -2,7 +2,6 @@
 # CS4341 A16 Project 3
 
 import csv, math
-from state import State
 
 # reads from inputFile and returns the boardStates as an array
 def readData(inputFile):
@@ -21,7 +20,7 @@ def readData(inputFile):
 				for i in l:
 					state.append(int(i))
 				# add this to boardStates array
-				boardStates.append(State(state))
+				boardStates.append(state)
 	return boardStates
 
 # calculates entropy based on the board and the given feature
@@ -31,7 +30,7 @@ def entropy(board, feature):
 	correct = 0
 	for state in board:
 		total += 1
-		if(state.board[42] == state.board[42 + feature]):
+		if(state[42] == state[42 + feature]):
 			correct += 1
 	if total > 0:
 		p = float(correct) / float(total)

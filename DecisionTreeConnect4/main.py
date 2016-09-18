@@ -4,7 +4,6 @@
 import sys, getopt
 from helpers import readData, entropy, informationgain
 from features import getFeature1, getFeature2, getFeature3, getFeature4, getFeature5
-from state import State
 
 def main(argv):
 	inputFile = ''
@@ -33,14 +32,14 @@ def main(argv):
 	
 	# create boardStates with the results from features, using training set only
 	for state in trainingSet:
-		currentState = state.board
-		currentState.append(getFeature1(state.board))
-		currentState.append(getFeature2(state.board))
-		currentState.append(getFeature3(state.board))
-		currentState.append(getFeature4(state.board))
-		currentState.append(getFeature5(state.board))
+		currentState = state
+		currentState.append(getFeature1(state))
+		currentState.append(getFeature2(state))
+		currentState.append(getFeature3(state))
+		currentState.append(getFeature4(state))
+		currentState.append(getFeature5(state))
 
-		boardStatesWithFeatures.append(State(currentState))
+		boardStatesWithFeatures.append(currentState)
 	
 	# bestIG = 0
 	# bestFeature = 0
@@ -65,6 +64,7 @@ def main(argv):
 	print featurePath
 
 
+# recursive function for constructing the decision tree from our array of state objects
 def getFeatureCombination(states):
 
 	bestIG = -1
@@ -75,9 +75,9 @@ def getFeatureCombination(states):
 		newLeft = []
 		newRight = []
 		for state in states:
-			if(state.board[42 + i] == 1):
+			if(state[42 + i] == 1):
 				newLeft.append(state)
-			elif(state.board[42 + i] == 2):
+			elif(state[42 + i] == 2):
 				newRight.append(state)
 		IG = informationgain(states, newLeft, newRight, i)
 		if(IG > bestIG):
