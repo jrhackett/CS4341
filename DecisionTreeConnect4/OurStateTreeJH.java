@@ -7,17 +7,17 @@
 
 import java.util.ArrayList;
 
-public class OurStateTreeJHTR extends StateTree implements Cloneable {
+public class OurStateTreeJH extends StateTree implements Cloneable {
 	
 	Move startingMove;
 	int bestValue;
-	ArrayList<OurStateTreeJHTR> childrenStates;
+	ArrayList<OurStateTreeJH> childrenStates;
 	
 	//our state tree implementation, init values
-	public OurStateTreeJHTR(int r, int c, int w, int t, boolean p1, boolean p2, StateTree p, int[][] board) {
+	public OurStateTreeJH(int r, int c, int w, int t, boolean p1, boolean p2, StateTree p, int[][] board) {
 		super(r, c, w, t, p1, p2, p);
 		startingMove = new Move(false, -1);
-		childrenStates = new ArrayList<OurStateTreeJHTR>();
+		childrenStates = new ArrayList<OurStateTreeJH>();
 		bestValue = t == 1 ? -1000000 : 1000000;
 		for(int i = 0; i < this.rows; i++) {
 			for(int j = 0; j < this.columns; j++) {
@@ -67,11 +67,11 @@ public class OurStateTreeJHTR extends StateTree implements Cloneable {
 	}
 	
 	//generates all valid children states for this board using the getMoves
-	private ArrayList<OurStateTreeJHTR> generateChildStates() {
-		ArrayList<OurStateTreeJHTR> states = new ArrayList<OurStateTreeJHTR>();
+	private ArrayList<OurStateTreeJH> generateChildStates() {
+		ArrayList<OurStateTreeJH> states = new ArrayList<OurStateTreeJH>();
 		//for every move in get moves, generate a child state
 		for(Move m : this.getMoves()) {
-			OurStateTreeJHTR newState = OurStateTreeJHTR.copy(this);
+			OurStateTreeJH newState = OurStateTreeJH.copy(this);
 			newState.makeMove(m);
 			//initializes bestValue to max or min depending on the turn
 			newState.bestValue = newState.turn == 1 ? -1000000 : 1000000;
@@ -82,9 +82,9 @@ public class OurStateTreeJHTR extends StateTree implements Cloneable {
 	}
 	
 	//returns a copy of this tree so we're not messing with java pointers
-	public static OurStateTreeJHTR copy(OurStateTreeJHTR state) {
+	public static OurStateTreeJH copy(OurStateTreeJH state) {
 		//init newState with new OurStateTree
-		OurStateTreeJHTR newState = new OurStateTreeJHTR(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state, state.boardMatrix);
+		OurStateTreeJH newState = new OurStateTreeJH(state.rows, state.columns, state.winNumber, state.turn, state.pop1, state.pop2, state, state.boardMatrix);
 		//for every spot in boardmatrix, copy that value to the newStates boardMatrix
 		for(int i = 0; i < newState.rows; i++) {
 			for(int j = 0; j < newState.columns; j++) {
@@ -103,6 +103,19 @@ public class OurStateTreeJHTR extends StateTree implements Cloneable {
 			//calculate the number of connections i long for each player and add a weighted sum to the heuristic
 			numCon = checkConnect(this, i);
 			heur += (numCon ^ i);
+		}
+		
+		int mid = this.columns / 2;
+		
+		for(int i = 0; i < this.rows; i++) {
+			for(int j = mid - 1; j < mid + 1; j++) {
+				if(this.boardMatrix[i][j] == 1) {
+					heur += 1;
+				}
+				else if (this.boardMatrix[i][j] == 2) {
+					heur -= 1;
+				}
+			}
 		}
 		return heur;	
 	}
