@@ -1,3 +1,6 @@
+# Jacob Hackett
+# CS4341 A16 Project 3
+
 # returns which player owns the bottom left piece in the board
 # first required feature
 def getFeature1(board):

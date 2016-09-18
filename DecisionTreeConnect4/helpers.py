@@ -2,6 +2,7 @@
 # CS4341 A16 Project 3
 
 import csv, math
+from state import State
 
 # reads from inputFile and returns the boardStates as an array
 def readData(inputFile):
@@ -20,7 +21,7 @@ def readData(inputFile):
 				for i in l:
 					state.append(int(i))
 				# add this to boardStates array
-				boardStates.append(state)
+				boardStates.append(State(state))
 	return boardStates
 
 # calculates entropy based on the board and the given feature
@@ -30,10 +31,16 @@ def entropy(board, feature):
 	correct = 0
 	for state in board:
 		total += 1
-		if(state[42] == state[42 + feature]):
+		if(state.board[42] == state.board[42 + feature]):
 			correct += 1
-	p = float(correct) / float(total)
-	return -p * math.log(p, 2) - (1 - p) * math.log((1 - p), 2)
+	if total > 0:
+		p = float(correct) / float(total)
+		if p == 0 or p == 1:
+			return 1
+		else:
+			return -p * math.log(p, 2) - (1 - p) * math.log((1 - p), 2)
+	else:
+		return 1
 
 # calculates the information gain by using the entropy of the parent, left child, and right child
 def informationgain(parent, left, right, feature):
