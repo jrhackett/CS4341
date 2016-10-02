@@ -4,7 +4,7 @@
 import sys, getopt, math
 from item import Item
 from bag import Bag
-from helpers import validate, forwardCheck
+from helpers import validate, lookAhead
 
 def main(argv):
 	inputFile = ''
@@ -132,7 +132,7 @@ def main(argv):
 	items.sort(key = lambda x: x.heuristic)
 	bags.sort(key = lambda x: x.heuristic)
 
-	# variable initialization for the bag packing algorithm with backtracking and forward checking
+	# variable initialization for the bag packing algorithm with backtracking and looking ahead
 	backtrack = False
 	currentItem = 0
 	currentBag = 0
@@ -155,10 +155,10 @@ def main(argv):
 					else:
 						backtrack = True
 						currentItem += 1
-				# otherwise we either want to forwardcheck to see if we can continue placing items in bags
+				# otherwise we either want to lookAhead to see if we can continue placing items in bags
 				# or we want to go back to the first bag
 				else:
-					if forwardCheck(items, bags, upperFit):
+					if lookAhead(items, bags, upperFit):
 						backtrack = True
 						currentItem += 1
 					else:
