@@ -1,0 +1,10 @@
+a B A 
+number of items: 2
+total weight: 92/100
+wasted capacity: 8 
+
+b C D 
+number of items: 2
+total weight: 92/100
+wasted capacity: 8 
+

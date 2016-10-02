@@ -1,0 +1,15 @@
+c B E 
+number of items: 2
+total weight: 3/3
+wasted capacity: 0 
+
+a C D F 
+number of items: 3
+total weight: 5/5
+wasted capacity: 0 
+
+b A G H I 
+number of items: 4
+total weight: 5/5
+wasted capacity: 0 
+
