@@ -21,6 +21,24 @@ following command to run the program:
 
 python main.py <inputfile.txt>
 
+## Testing
+
+I ran tests on every input file within the inputs folder. The corresponding
+outputs can be seen in the outputs folder. I also ran tests on every input
+within the tests folder but my program did not perform well on all of them.
+Namely it could not find solutions for input26 nor input33. All other situations
+yielded proper results.
+
+## Strengths and Weaknesses
+
+The biggest weakness I could see through testing was that in the case where we
+have tests such as input26 or input33, my program cannot solve this. It thinks
+there are no solutions when I can see a pretty obvious one just by looking at
+the data. I'm not entirely sure what the problem is there. I've tried debugging
+it to no avail. These two tests are categorized as tests with large numbers of 
+bags and items and all bags are 100% full at the end of the exercise. There is
+only one solution for each of these.
+
 ## Credits
 
 Jacob Hackett

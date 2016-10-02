@@ -27,6 +27,7 @@ def main(argv):
 	upperFit = float("inf")
 	lowerFit = 0
 
+	# read in data from the inputFile and parse it to Bag and Item objects
 	with open(inputFile, 'r') as f:
 		check = 0
 		for line in f:
@@ -134,6 +135,7 @@ def main(argv):
 
 	# variable initialization for the bag packing algorithm with backtracking and looking ahead
 	backtrack = False
+	noSolution = False
 	currentItem = 0
 	currentBag = 0
 
@@ -176,6 +178,7 @@ def main(argv):
 			# if we're at the last one, we can't find a solution -- break
 			if currentItem is 0 and items[currentItem].bag.equals(bags[len(bags) - 1]):
 				print "No solution for this set, check your data"
+				noSolution = True
 				break
 			# otherwise we want to remove the last item from the currentItem's bag and potentially stop backtracking
 			else:
@@ -189,14 +192,15 @@ def main(argv):
 					backtrack = False
 
 	# printing final state
-	for bag in bags:
-		print bag.name,
-		for item in items:
-			if item.bag.name is not "dummy" and item.bag.name is bag.name:
-				print item.name,
-		print "\nnumber of items:", len(bag.items)
-		print "total weight:", str(bag.getTotalWeight()) + "/" + str(bag.limit)
-		print "wasted capacity:", bag.limit - bag.getTotalWeight(), "\n"
+	if not noSolution:
+		for bag in bags:
+			print bag.name,
+			for item in items:
+				if item.bag.name is not "dummy" and item.bag.name is bag.name:
+					print item.name,
+			print "\nnumber of items:", len(bag.items)
+			print "total weight:", str(bag.getTotalWeight()) + "/" + str(bag.limit)
+			print "wasted capacity:", bag.limit - bag.getTotalWeight(), "\n"
 
 
 if __name__ == "__main__":
