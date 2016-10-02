@@ -14,6 +14,21 @@ class Bag:
 		self.items = []
 		self.heuristic = 0
 
+	# printing override
+	def __repr__(self):
+		return "Bag name: " + self.name + " Bag limit: " + str(self.limit)
+
+	# printing override
+	def __str__(self):
+		return "Bag name: " + self.name + " Bag limit: " + str(self.limit)
+
+	# convenient .equals function that just compared the bags' names
+	def equals(self, other):
+		if self.name is other.name:
+			return True
+		else:
+			return False
+
 	# adds item to the bag
 	# must also update the item's bag and inBag variables
 	def addItem(self, item):
@@ -49,14 +64,3 @@ class Bag:
 			self.items[len(self.items) - 1].bag = Bag("dummy", 0)
 			self.items[len(self.items) - 1].inBag = False
 			self.items.pop()
-
-	# printing override
-	def __repr__(self):
-		return "Bag name: " + self.name + " Bag limit: " + str(self.limit)
-
-	# convenient .equals function that just compared the bags' names
-	def equals(self, other):
-		if self.name is other.name:
-			return True
-		else:
-			return False

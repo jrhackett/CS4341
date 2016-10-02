@@ -159,12 +159,12 @@ def main(argv):
 				# or we want to go back to the first bag
 				else:
 					if lookAhead(items, bags, upperFit):
-						backtrack = True
-						currentItem += 1
-					else:
 						currentBag = 0
 						currentItem += 1
-			# if we're at the end of our bags, we need to backtrack
+					else:
+						backtrack = True
+						currentItem += 1
+			# if we're at the end of our bags, we need to backtrack since we have no solution yet
 			elif currentBag is len(bags) - 1:
 				backtrack = True
 			# otherwise, let's try the next bag

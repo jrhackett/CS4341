@@ -20,9 +20,9 @@ def validate(items, bags, lower):
 
 # when looking ahead, i am trying to determine the effects of choosing an item to explore
 # this is the same thing is forward checking
-# this function essentially returns True if there are no more options for items to go
+# this function essentially returns False if there are no more options for items to go
 # into bags, or in otherwords the domain is empty
-# it returns false if there are more options
+# it returns True if there are more options
 def lookAhead(items, bags, upper):
 	check = False
 	for item in items:
@@ -32,5 +32,5 @@ def lookAhead(items, bags, upper):
 				if item.allowed(bag, upper):
 					check = False
 		if check:
-			return True
-	return False
+			return False
+	return True
