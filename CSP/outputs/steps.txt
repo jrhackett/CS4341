@@ -1,0 +1,71 @@
+Current item: Item name: H Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: A Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: B Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: B Item weight: 1
+Current bag: Bag name: b Bag limit: 5
+Not backtracking
+Current item: Item name: E Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: F Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: G Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: I Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: I Item weight: 1
+Current bag: Bag name: b Bag limit: 5
+Not backtracking
+Current item: Item name: C Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: C Item weight: 1
+Current bag: Bag name: b Bag limit: 5
+Not backtracking
+Current item: Item name: D Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: D Item weight: 1
+Current bag: Bag name: b Bag limit: 5
+Not backtracking
+Current item: Item name: J Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: J Item weight: 1
+Current bag: Bag name: b Bag limit: 5
+Not backtracking
+Current item: Item name: K Item weight: 1
+Current bag: Bag name: a Bag limit: 5
+Not backtracking
+Current item: Item name: K Item weight: 1
+Current bag: Bag name: b Bag limit: 5
+Not backtracking
+Current item: Item name: K Item weight: 1
+Current bag: Bag name: c Bag limit: 1
+Not backtracking
+Consistency checks: 18 
+
+a H A E F G 
+number of items: 5
+total weight: 5/5
+wasted capacity: 0 
+
+b B I C D J 
+number of items: 5
+total weight: 5/5
+wasted capacity: 0 
+
+c K 
+number of items: 1
+total weight: 1/1
+wasted capacity: 0 
+
