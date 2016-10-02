@@ -7,6 +7,7 @@ from bag import Bag
 from helpers import validate, lookAhead
 
 def main(argv):
+	verbose = False
 	inputFile = ''
 
 	# read in command line arguments and assign input and output file
@@ -139,11 +140,20 @@ def main(argv):
 	currentItem = 0
 	currentBag = 0
 
+	# keeps track of consistency checks for performance measures
+	checks = 0
+
 	# until we break out of the while loop, we're going to continue trying to place items
 	# essentially just DFS
 	while True:
+		checks += 1
 		# if we're not backtracking
+		if verbose:
+			print "Current item:", items[currentItem]
+			print "Current bag:", bags[currentBag]
 		if not backtrack:
+			if verbose:
+				print "Not backtracking"
 			# check if this item is allowed in this bag
 			if items[currentItem].allowed(bags[currentBag], upperFit):
 				# add this item to this bag
@@ -174,6 +184,8 @@ def main(argv):
 				currentBag += 1
 		# if backtracking
 		elif backtrack:
+			if verbose:
+				print "Backtracking"
 			currentItem -= 1
 			# if we're at the last one, we can't find a solution -- break
 			if currentItem is 0 and items[currentItem].bag.equals(bags[len(bags) - 1]):
@@ -190,6 +202,9 @@ def main(argv):
 				if currentBag is not len(bags) - 1:
 					currentBag += 1
 					backtrack = False
+
+	if verbose:
+		print "Consistency checks:", checks, "\n"
 
 	# printing final state
 	if not noSolution:

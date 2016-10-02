@@ -21,6 +21,11 @@ following command to run the program:
 
 python main.py <inputfile.txt>
 
+Note that if you want to see detailed output that specifies which item and bag
+are considered the current state of the program and to see the number of 
+consistency checks performed during the search, you have to change line 10
+from 'verbose = False' to 'verbose = True'
+
 ## Testing
 
 I ran tests on every input file within the inputs folder. The corresponding
